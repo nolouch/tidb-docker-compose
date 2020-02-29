@@ -61,64 +61,6 @@ services:
       - --config=/pd.toml
       - --log-file=/logs/pd2.log
     restart: on-failure
-  tikv0:
-    image: pingcap/tikv:v4.0.0-beta
-    volumes:
-      - ./config/tikv.toml:/tikv.toml:ro
-      - ./data:/data
-      - ./logs:/logs
-      - ./cert:/cert
-    command:
-      - --addr=0.0.0.0:20160
-      - --advertise-addr=tikv0:20160
-      - --data-dir=/data/tikv0
-      - --pd=pd0:2379,pd1:2379,pd2:2379
-      - --config=/tikv.toml
-      - --log-file=/logs/tikv0.log
-    depends_on:
-      - "pd0"
-      - "pd1"
-      - "pd2"
-    restart: on-failure
-  tikv1:
-    image: pingcap/tikv:v4.0.0-beta
-    volumes:
-      - ./config/tikv.toml:/tikv.toml:ro
-      - ./data:/data
-      - ./logs:/logs
-      - ./cert:/cert
-    command:
-      - --addr=0.0.0.0:20160
-      - --advertise-addr=tikv1:20160
-      - --data-dir=/data/tikv1
-      - --pd=pd0:2379,pd1:2379,pd2:2379
-      - --config=/tikv.toml
-      - --log-file=/logs/tikv1.log
-    depends_on:
-      - "pd0"
-      - "pd1"
-      - "pd2"
-    restart: on-failure
-  tikv2:
-    image: pingcap/tikv:v4.0.0-beta
-    volumes:
-      - ./config/tikv.toml:/tikv.toml:ro
-      - ./data:/data
-      - ./logs:/logs
-      - ./cert:/cert
-    command:
-      - --addr=0.0.0.0:20160
-      - --advertise-addr=tikv2:20160
-      - --data-dir=/data/tikv2
-      - --pd=pd0:2379,pd1:2379,pd2:2379
-      - --config=/tikv.toml
-      - --log-file=/logs/tikv2.log
-    depends_on:
-      - "pd0"
-      - "pd1"
-      - "pd2"
-    restart: on-failure
-
   tidb:
     image: pingcap/tidb:latest
     ports:
@@ -134,7 +76,7 @@ services:
       - --config=/tidb.toml
       - --log-file=/logs/tidb.log
     depends_on:
-      - "tikv0"
-      - "tikv1"
-      - "tikv2"
+      - "pd0"
+      - "pd1"
+      - "pd2"
     restart: on-failure

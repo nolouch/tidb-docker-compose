@@ -16,4 +16,5 @@ echo '{"CN":"client","hosts":[""],"key":{"algo":"rsa","size":2048}}' | cfssl gen
 
 cd ..
 
-docker-compose up -d
+docker-compose -f ./docker-compose-pd.yml up -d --build
+#docker-compose  up -d --build 

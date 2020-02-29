@@ -26,7 +26,7 @@ cert-path = "/cert/pd-server.pem"
 key-path = "/cert/pd-server-key.pem"
 
 [log]
-level = "error"
+level = "info"
 
 # log format, one of json, text, console
 #format = "text"
@@ -48,9 +48,9 @@ level = "error"
 
 [metric]
 # prometheus client push interval, set "0s" to disable prometheus.
-interval = "15s"
+#interval = "15s"
 # prometheus pushgateway address, leaves it empty will disable prometheus.
-address = "pushgateway:9091"
+#address = "pushgateway:9091"
 
 [schedule]
 max-merge-region-size = 0
